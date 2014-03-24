@@ -1,0 +1,24 @@
+{
+	"agent": {
+		"host" : "hostname",
+		"pid" : 1234,
+		"version" : "1.0.0"
+	},
+
+	"components" : [
+	{
+		"name": "PHP Opcache",
+		"guid": "com.kingrst.phpopcache",
+		"duration" : 60,
+		"metrics " {
+			"Component/ProductionDB[Queries/Second]": 100,
+			"Component/AnalyticsDB[Queries/Second]": {
+				"min" : 2,
+				"max" : 10,
+				"total": 2,
+				"count": 2,
+				"sum_of_squares" : 144
+			}
+		}
+	}]
+}
