@@ -183,7 +183,4 @@
       return $post_result;
     }
   }
-
-  System_Daemon::setOption('PHPOPcacheNewrelic', 'phpocnr');
-  System_Daemon::start();
 ?>
