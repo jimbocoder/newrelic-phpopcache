@@ -42,18 +42,18 @@
     protected $config_location = array( '.', '/etc/newrelic-phpopcache' );
     protected $config_name = 'newrelic-phpopcache';
     protected $platform_api_uri = 'https://platform-api.newrelic.com/platform/v1/metrics';
-    protected $run_once = false;
 
     protected $hostname;
     protected $pid;
     protected $license_key;
 
     public function __construct( $args ) {
+      // Set the pid of the PHP process
       $this->pid = getmypid();
 
       // Allowed arguments & their defaults
       $this->runmode = array(
-        'no-daemon' => false,
+        'run_once' => false,
 	'help' => false,
 	'daemonize' => true
       );
