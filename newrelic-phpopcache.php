@@ -113,16 +113,16 @@
       return false;
     }
 
-    private start_daemon () {
+    private start_daemon() {
     }
 
-    private stop_daemon () {
+    private stop_daemon() {
     }
 
-    private show_help () {
+    private show_help() {
     }
 
-    private run_once () {
+    private run_once() {
       // Reload the configuration file values in case they were updated
       $this->load_config();
 
@@ -167,7 +167,7 @@
       return true;
     }
 
-    private post_metrics () {
+    private post_metrics() {
       // Convert our metrics array to json
       $json_metrics = json_encode($this->metrics);
 
