@@ -40,7 +40,7 @@
     protected $version = '1.0.0';
     protected $poll_cycle = 60;
     protected $config_location = array( '.', '/etc/newrelic-phpopcache' );
-    protected $config_name = 'newrelic-phpopcache';
+    protected $config_name = 'newrelic-phpopcache.ini';
     protected $platform_api_uri = 'https://platform-api.newrelic.com/platform/v1/metrics';
 
     protected $hostname;
