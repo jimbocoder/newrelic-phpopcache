@@ -71,6 +71,9 @@
       return 0;
     }
 
+    private process_args() {
+    }
+
     private load_config() {
       foreach ( $this->config_location as $config ) {
         if (stat($config.'/'.$this->config_name)) {
