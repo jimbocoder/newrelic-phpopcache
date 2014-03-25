@@ -33,7 +33,6 @@
   require_once "System/Daemon.php";
 
   class newrelic-phpopcache {
-    protected $runmode = array();
     protected $metrics = array();
     protected $instance_name = 'PHP OPcache';
     protected $plugin_guid = 'com.kingrst.phpopcache';
@@ -45,6 +44,13 @@
     protected $config_name = 'newrelic-phpopcache.ini';
     protected $platform_api_uri = 'https://platform-api.newrelic.com/platform/v1/metrics';
 
+    // Allowed arguments & their defaults
+    protected $runmode = array(
+      'run_once' => false,
+      'help' => false,
+      'daemonize' => true,
+    );
+
     protected $hostname;
     protected $pid;
     protected $license_key;
@@ -53,19 +59,16 @@
       // Set the pid of the PHP process
       $this->pid = getmypid();
 
-      // Allowed arguments & their defaults
-      $this->runmode = array(
-        'run_once' => false,
-	'help' => false,
-	'daemonize' => true
-      );
+      // Scan command line attributes for allowed arguments
+      foreach ($args as $k=>$arg) {
+        if (substr($arg, 0, 2) == '--' isset($this->runmode[substr($arg, 2)])) {
+          $this->runmode[substr($arg, 2)] = true;
+	}
+      }
 
       $this->load_config();
 
       return 0;
-    }
-
-    private process_args() {
     }
 
     private load_config() {
