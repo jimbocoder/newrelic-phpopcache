@@ -60,15 +60,7 @@
 	'daemonize' => true
       );
 
-      $config_code = $this->load_config();
-
-      if ($config_code == 21) {
-        echo 'No license_key found in configuration';
-        exit(21);
-      } elseif ($config_code == false ) {
-        echo 'No configuration file was found';
-        exit(20);
-      }
+      $this->load_config();
 
       return 0;
     }
@@ -99,7 +91,8 @@
 	  if ( isset($config_values['license_key']) ) {
             $this->license_key = $config_values['license_key'];
 	  } else {
-	    return 21;
+	    echo 'No license_key found in configuration';
+            exit(31);
 	  }
 
           // If the platform_api_uri is set in the config then set it, else leave it as the default
@@ -113,7 +106,8 @@
       }
 
       // No config files were found, return false
-      return false;
+      echo 'No configuration file was found';
+      exit(20);
     }
 
     // This function is to be called after initializing the object. This actually starts the process
