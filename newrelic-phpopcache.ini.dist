@@ -1,0 +1,11 @@
+# Set this to override your hostname
+hostname = ''
+
+# This should be the license_key to your Newrelic account
+license_key = 'YOUR_NEWRELIC_ACCOUNT_LICENSE_KEY'
+
+# Name of your server instance
+instance_name = ''
+
+# URL to post metrics to
+platform_api_uri = ''
