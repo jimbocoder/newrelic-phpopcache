@@ -55,7 +55,7 @@
     protected $pid;
     protected $license_key;
 
-    public function __construct( $args ) {
+    public function __construct( $args = array() ) {
       // Set the pid of the PHP process
       $this->pid = getmypid();
 
@@ -115,6 +115,11 @@
 
     // This function is to be called after initializing the object. This actually starts the process
     public run() {
+      // If help was specified as an argument, show the help
+      if ($this->runmode['help'] == true) {
+        $this->show_help();
+        die();
+      }
     }
 
     private start_daemon() {
@@ -124,6 +129,14 @@
     }
 
     private show_help() {
+      echo "Usage: newrelic-phpopcache [runmode]\n";
+      echo "Avaliable runmodes:\n";
+
+      foreach ($this->runmode as $runmod=>$val) {
+        echo ' --'.$runmod."\n";
+      }
+
+      die();
     }
 
     private run_once() {
