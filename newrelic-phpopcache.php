@@ -38,6 +38,8 @@
     protected $instance_name = 'PHP OPcache';
     protected $plugin_guid = 'com.kingrst.phpopcache';
     protected $version = '1.0.0';
+
+    // Metrics poll cycle in seconds
     protected $poll_cycle = 60;
     protected $config_location = array( '.', '/etc/newrelic-phpopcache' );
     protected $config_name = 'newrelic-phpopcache.ini';
@@ -112,6 +114,10 @@
 
       // No config files were found, return false
       return false;
+    }
+
+    // This function is to be called after initializing the object. This actually starts the process
+    public run() {
     }
 
     private start_daemon() {
