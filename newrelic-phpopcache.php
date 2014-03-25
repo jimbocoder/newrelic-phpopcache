@@ -123,9 +123,19 @@
     }
 
     private run_once () {
+      // Reload the configuration file values in case they were updated
+      $this->load_config();
+
+      // Refresh the OPcache statistics
+      $this->gather_metrics();
+
+      // Send the metrics to Newrelic
+      $this->post_metrics();
+
+      return 0;
     }
 
-    private gather_metrics () {
+    private gather_metrics() {
       $opcache_stats = opcache_get_status();
 
       $this->metrics = array(
