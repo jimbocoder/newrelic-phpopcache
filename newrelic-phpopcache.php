@@ -32,7 +32,7 @@
 
   require_once "System/Daemon.php";
 
-  class newrelic-phpopcache {
+  class NRPHPOpcache {
     protected $metrics = array();
     protected $instance_name = 'PHP OPcache';
     protected $plugin_guid = 'com.kingrst.phpopcache';
@@ -61,17 +61,17 @@
 
       // Scan command line attributes for allowed arguments
       foreach ($args as $k=>$arg) {
-        if (substr($arg, 0, 2) == '--' isset($this->runmode[substr($arg, 2)])) {
+        if (substr($arg, 0, 2) == '--' && isset($this->runmode[substr($arg, 2)])) {
           $this->runmode[substr($arg, 2)] = true;
 	}
       }
 
-      $this->load_config();
+      $this->load_conf();
 
       return 0;
     }
 
-    private load_config() {
+    private function load_conf() {
       foreach ( $this->config_location as $config ) {
         if (stat($config.'/'.$this->config_name)) {
 	  $full_config_path = $config.'/'.$this->config_name;
@@ -86,7 +86,7 @@
 	  }
 
 	  // If instance_name is not specified in the configuration, leave it at the default
-	  if ( isset($config_values['instance_name'] || !$config_values['instance_name'] == NULL ) {
+	  if ( isset($config_values['instance_name']) || !$config_values['instance_name'] == NULL ) {
 	    $this->instance_name = $config_values['instance_name'];
 	  }
 
@@ -114,7 +114,7 @@
     }
 
     // This function is to be called after initializing the object. This actually starts the process
-    public run() {
+    public function run() {
       // If help was specified as an argument, show the help
       if ($this->runmode['help'] == true) {
         $this->show_help();
@@ -122,13 +122,13 @@
       }
     }
 
-    private start_daemon() {
+    private function start_daemon() {
     }
 
-    private stop_daemon() {
+    private function stop_daemon() {
     }
 
-    private show_help() {
+    private function show_help() {
       echo "Usage: newrelic-phpopcache [runmode]\n";
       echo "Avaliable runmodes:\n";
 
@@ -139,20 +139,22 @@
       die();
     }
 
-    private run_once() {
+    public function run_once() {
       // Reload the configuration file values in case they were updated
-      $this->load_config();
+      $this->load_conf();
 
       // Refresh the OPcache statistics
       $this->gather_metrics();
 
       // Send the metrics to Newrelic
-      $this->post_metrics();
+      $post_result = $this->post_metrics();
+      echo $post_result;
+      print_r($this->metrics);
 
       return 0;
     }
 
-    private gather_metrics() {
+    private function gather_metrics() {
       $opcache_stats = opcache_get_status();
 
       $this->metrics = array(
@@ -184,7 +186,7 @@
       return true;
     }
 
-    private post_metrics() {
+    private function post_metrics() {
       // Convert our metrics array to json
       $json_metrics = json_encode($this->metrics);
 
@@ -202,4 +204,9 @@
       return $post_result;
     }
   }
+
+  $arg = array( 'run_once' => true );
+
+  $nr = new NRPHPOpcache($arg);
+  $nr->run_once();
 ?>
