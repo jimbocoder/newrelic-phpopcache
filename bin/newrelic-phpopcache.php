@@ -89,7 +89,7 @@
 	  $config_values = parse_ini_file($full_config_path, false);
 
 	  // If poll_cycle is not specified in the configuration, set to default
-	  if ( !isset($config_values['poll_cycle']) || !is_int($config_values['poll_cycle'] ) {
+	  if ( !isset($config_values['poll_cycle']) || !is_int($config_values['poll_cycle'] ) ) {
             $this->poll_cycle = 60;
 	  } else {
             $this->poll_cycle = $config_values['poll_cycle'];
