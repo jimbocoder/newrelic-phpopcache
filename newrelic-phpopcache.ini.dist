@@ -9,3 +9,6 @@ instance_name = ''
 
 # URL to post metrics to
 platform_api_uri = ''
+
+# Polling interval of the plugin (default 60)
+poll_cycle = ''
