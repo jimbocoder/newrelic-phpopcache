@@ -39,7 +39,7 @@
 
     // Metrics poll cycle in seconds
     protected $poll_cycle = 60;
-    protected $config_location = array( '.', '/etc/newrelic-phpopcache' );
+    protected $config_location = array( '.', '/etc/newrelic-phpopcache', '/etc/newrelic' );
     protected $config_name = 'newrelic-phpopcache.ini';
     protected $platform_api_uri = 'https://platform-api.newrelic.com/platform/v1/metrics';
 
