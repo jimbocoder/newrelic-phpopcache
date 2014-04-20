@@ -33,6 +33,7 @@
     protected $metrics = array();
     protected $instance_name = 'PHP OPcache';
     protected $plugin_guid = 'com.kingrst.phpopcache';
+    protected $poll_cycle;
     protected $version = '1.0.0';
 
     protected $config_location = array( '.', '/etc/newrelic-phpopcache', '/etc/newrelic' );
@@ -86,6 +87,13 @@
 	  $full_config_path = $config.'/'.$this->config_name;
 
 	  $config_values = parse_ini_file($full_config_path, false);
+
+	  // If poll_cycle is not specified in the configuration, set to default
+	  if ( !isset($config_values['poll_cycle']) || !is_int($config_values['poll_cycle'] ) {
+            $this->poll_cycle = 60;
+	  } else {
+            $this->poll_cycle = $config_values['poll_cycle'];
+          }
 
 	  // If hostname is not specfied in the configuration, auto detect it
 	  if ( !isset($config_values['hostname']) || $config_values['hostname'] == NULL ) {
@@ -193,6 +201,8 @@
       preg_match("/(\d+){3}/", $http_response_header[0], $preg_matches);
 
       $return_status = array( 'http_error_code' => $preg_matches[0], 'http_data' => $post_result );
+
+      print_r($this->metrics);
 
       return $return_status;
     }
