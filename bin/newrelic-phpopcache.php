@@ -206,6 +206,12 @@
     die();
   }
 
+  if ( $_REQUEST['test'] ) {
+    echo "Success! Newrelic-phpopcache appears to be installed successfully.\n";
+
+    die();
+  }
+
   $nr = new NRPHPOPcache();
   $nr->run();
 ?>
