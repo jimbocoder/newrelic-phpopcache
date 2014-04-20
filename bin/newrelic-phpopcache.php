@@ -202,8 +202,6 @@
 
       $return_status = array( 'http_error_code' => $preg_matches[0], 'http_data' => $post_result );
 
-      print_r($this->metrics);
-
       return $return_status;
     }
   }
