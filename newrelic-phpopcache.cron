@@ -1,0 +1,2 @@
+# This cron will load the Newrelic PHP OPcache plugin every 60 seconds.
+* * * * * curl http://localhost/newrelic-phpopcache 2&>1 > /dev/null
