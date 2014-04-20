@@ -43,13 +43,6 @@
     protected $config_name = 'newrelic-phpopcache.ini';
     protected $platform_api_uri = 'https://platform-api.newrelic.com/platform/v1/metrics';
 
-    // Allowed arguments & their defaults
-    protected $runmode = array(
-      'run_once' => false,
-      'help' => false,
-      'daemonize' => true,
-    );
-
     protected $api_error_codes = array (
       '400' => array(
         'name' => 'Bad Request',
@@ -83,17 +76,9 @@
     protected $pid;
     protected $license_key;
 
-    public function __construct( $args = array() ) {
+    public function __construct() {
       // Set the pid of the PHP process
       $this->pid = getmypid();
-
-      // Scan command line attributes for allowed arguments
-      foreach ($args as $k=>$arg) {
-        if (substr($arg, 0, 2) == '--' && isset($this->runmode[substr($arg, 2)])) {
-          $this->runmode[substr($arg, 2)] = true;
-	}
-      }
-
       $this->load_conf();
 
       return 0;
@@ -143,28 +128,6 @@
 
     // This function is to be called after initializing the object. This actually starts the process
     public function run() {
-      // If help was specified as an argument, show the help
-      if ($this->runmode['help'] == true) {
-        $this->show_help();
-        die();
-      }
-    }
-
-    private function show_help() {
-      echo "Usage: newrelic-phpopcache [runmode]\n";
-      echo "Avaliable runmodes:\n";
-
-      foreach ($this->runmode as $runmod=>$val) {
-        echo ' --'.$runmod."\n";
-      }
-
-      die();
-    }
-
-    public function run_once() {
-      // Reload the configuration file values in case they were updated
-      $this->load_conf();
-
       // Refresh the OPcache statistics
       $this->gather_metrics();
 
@@ -237,8 +200,12 @@
     }
   }
 
-  $arg = array( 'run_once' => true );
+  if ( php_sapi_name() == 'cli' ) {
+    echo "Please run this code via a web browser. The OPcache statistics will not be accurate if ran from the command line!\n";
 
-  $nr = new NRPHPOPcache($arg);
-  $nr->run_once();
+    die();
+  }
+
+  $nr = new NRPHPOPcache();
+  $nr->run();
 ?>
