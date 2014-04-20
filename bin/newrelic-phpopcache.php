@@ -29,16 +29,12 @@
  *
  */
 
-  require_once "System/Daemon.php";
-
   class NRPHPOPcache {
     protected $metrics = array();
     protected $instance_name = 'PHP OPcache';
     protected $plugin_guid = 'com.kingrst.phpopcache';
     protected $version = '1.0.0';
 
-    // Metrics poll cycle in seconds
-    protected $poll_cycle = 60;
     protected $config_location = array( '.', '/etc/newrelic-phpopcache', '/etc/newrelic' );
     protected $config_name = 'newrelic-phpopcache.ini';
     protected $platform_api_uri = 'https://platform-api.newrelic.com/platform/v1/metrics';
@@ -99,9 +95,11 @@
 	  }
 
 	  // If instance_name is not specified in the configuration, leave it at the default
-	  if ( isset($config_values['instance_name']) || !$config_values['instance_name'] == NULL ) {
-	    $this->instance_name = $config_values['instance_name'];
-	  }
+	  if ( !isset($config_values['instance_name']) || $config_values['instance_name'] == NULL ) {
+            $this->instance_name = 'Default PHP OPcache Instance';
+	  } else {
+            $this->instance_name = $config_values['instance_name'];
+          }
 
 	  // If the liense_key is set in the config then set it, else throw an error code
 	  if ( isset($config_values['license_key']) ) {
