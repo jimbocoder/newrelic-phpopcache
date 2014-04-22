@@ -117,11 +117,6 @@
             exit(31);
 	  }
 
-          // If the platform_api_uri is set in the config then set it, else leave it as the default
-          if ( isset($config_values['platform_api_uri']) || !$config_values['platform_api_uri'] == NULL ) {
-            $this->platform_api_uri = $config_values['platform_api_uri'];
-          }
-
 	  // A config file was found and successfully parsed, return true
 	  return true;
         }

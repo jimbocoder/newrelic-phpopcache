@@ -7,8 +7,5 @@ license_key = 'YOUR_NEWRELIC_ACCOUNT_LICENSE_KEY'
 # Name of your server instance
 instance_name = ''
 
-# URL to post metrics to
-platform_api_uri = ''
-
 # Polling interval of the plugin (default 60)
 poll_cycle = ''
