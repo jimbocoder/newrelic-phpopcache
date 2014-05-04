@@ -83,7 +83,7 @@
 
     private function load_conf() {
       foreach ( $this->config_location as $config ) {
-        if (stat($config.'/'.$this->config_name)) {
+        if (file_exists($config.'/'.$this->config_name)) {
 	  $full_config_path = $config.'/'.$this->config_name;
 
 	  $config_values = parse_ini_file($full_config_path, false);
