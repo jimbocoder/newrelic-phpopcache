@@ -207,9 +207,8 @@
     die();
   }
 
-  if ( $_REQUEST['test'] ) {
+  if ( isset($_REQUEST['test']) ) {
     echo "Success! Newrelic-phpopcache appears to be installed successfully.\n";
-
     die();
   }
 
