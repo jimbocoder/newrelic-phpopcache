@@ -76,6 +76,11 @@
     public function __construct() {
       // Set the pid of the PHP process
       $this->pid = getmypid();
+
+      if( !$this->is_opcache_enabled() ) {
+        echo "OPcache is not enabled! Please add opcache.enable=1 to your php.ini file.";
+        exit(1);
+      }
       $this->load_conf();
 
       return 0;
