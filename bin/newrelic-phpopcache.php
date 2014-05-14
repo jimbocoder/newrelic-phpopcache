@@ -81,6 +81,7 @@
         echo "OPcache is not enabled! Please add opcache.enable=1 to your php.ini file.";
         exit(1);
       }
+
       $this->load_conf();
 
       return 0;
