@@ -81,6 +81,10 @@
       return 0;
     }
 
+    private function is_opcache_enabled() {
+      return ini_get('opcache.enable');
+    }
+
     private function load_conf() {
       foreach ( $this->config_location as $config ) {
         if (file_exists($config.'/'.$this->config_name)) {
