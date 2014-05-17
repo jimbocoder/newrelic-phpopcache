@@ -34,7 +34,7 @@
     protected $instance_name = 'PHP OPcache';
     protected $plugin_guid = 'com.kingrst.phpopcache';
     protected $poll_cycle;
-    protected $version = '1.0.2';
+    protected $version = '1.0.3';
 
     protected $config_location = array( '.', '/etc/newrelic-phpopcache', '/etc/newrelic' );
     protected $config_name = 'newrelic-phpopcache.ini';
