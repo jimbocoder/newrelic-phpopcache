@@ -185,7 +185,7 @@
 			  'Component/PHPOPcache/Cache/Restarts/Hash[restarts]' => $opcache_stats['opcache_statistics']['hash_restarts'],
 			  'Component/PHPOPcache/Cache/Restarts/Manual[restarts]' => $opcache_stats['opcache_statistics']['manual_restarts'],
 			  'Component/PHPOPcache/Configuration/Directives/opcache.enable[boolean]' => $opcache_conf['directives']['opcache.enable'],
-			  'Component/PHPOPcache/Configuration/Directives/opcache.enable_cli[boolean]' => $opcache_conf['directives']['opcache.enable.cli'],
+			  'Component/PHPOPcache/Configuration/Directives/opcache.enable_cli[boolean]' => $opcache_conf['directives']['opcache.enable_cli'],
 			  'Component/PHPOPcache/Configuration/Directives/opcache.use_cwd[boolean]' => $opcache_conf['directives']['opcache.use_cwd'],
 			  'Component/PHPOPcache/Configuration/Directives/opcache.validate_timestamps[boolean]' => $opcache_conf['directives']['opcache.validate_timestamps'],
 			  'Component/PHPOPcache/Configuration/Directives/opcache.inherited_hack[boolean]' => $opcache_conf['directives']['opcache.inherited_hack'],
