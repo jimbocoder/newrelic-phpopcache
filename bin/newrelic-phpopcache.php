@@ -242,7 +242,7 @@
 
   $nr = new NRPHPOPcache();
 
-  if ( php_sapi_name() == 'cli' ) {
+  if ( php_sapi_name() == 'cli' && !isset($_REQUEST['live']) ) {
     echo "Please run this code via a web browser. The OPcache statistics will not be accurate if ran from the command line!\n";
 
     die();
