@@ -158,6 +158,8 @@
       $opcache_stats = opcache_get_status();
       $opcache_conf = opcache_get_configuration();
 
+      $opcache_stats['memory_usage']['percent_used'] = $opcache_stats['memory_usage']['used_memory'] / ($opcache_stats['memory_usage']['used_memory'] + $opcache_stats['memory_usage']['free_memory']) * 100;
+
       $this->metrics = array(
           'agent' => array(
                   'host' => $this->hostname,
@@ -170,7 +172,8 @@
                   'metrics' => array (
                           'Component/PHPOPcache/Memory/Used[bytes]' => $opcache_stats['memory_usage']['used_memory'],
                           'Component/PHPOPcache/Memory/Free[bytes]' => $opcache_stats['memory_usage']['free_memory'],
-                          'Component/PHPOPcache/Memory/Wasted[bytes]' => $opcache_stats['memory_usage']['wasted_memory'],
+			  'Component/PHPOPcache/Memory/Wasted[bytes]' => $opcache_stats['memory_usage']['wasted_memory'],
+			  'Component/PHPOPcache/Memory/PercentUsed[percent]' => $opcache_stats['memory_usage']['percent_used'],
 			  'Component/PHPOPcache/Cache/TotalScripts[scripts]' => $opcache_stats['opcache_statistics']['num_cached_scripts'],
 			  'Component/PHPOPcache/Cache/HitRate[percent]' => $opcache_stats['opcache_statistics']['opcache_hit_rate'],
                           'Component/PHPOPcache/Cache/Keys/Current[keys]' => $opcache_stats['opcache_statistics']['num_cached_keys'],
@@ -183,7 +186,7 @@
 			  'Component/PHPOPcache/Cache/Restarts/Manual[restarts]' => $opcache_stats['opcache_statistics']['manual_restarts'],
                   )
           ))
-      );
+        );
 
       return true;
     }
