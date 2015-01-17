@@ -1,0 +1,19 @@
+{
+    "name": "jimbocoder/newrelic-phpopcache",
+    "description": "Newrelic plugin for PHP OPcache reporting",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Jim Howell",
+            "email": "jimbocoder@gmail.com"
+        },
+        {
+            "name": "Steven King",
+            "email": "kingrst@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "require": {}
+}
